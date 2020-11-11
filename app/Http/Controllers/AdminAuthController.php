@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminAuthController extends Controller
 {
@@ -14,7 +15,7 @@ class AdminAuthController extends Controller
                 'form_params' => [
                     'grant_type'=> 'password',
                     'client_id' => 2,
-                    'client_secret' => 'k05tLZxJsQPoYxR36tqxlcCicvvfrsn7ZAYOOUwF',
+                    'client_secret' => '9TZpgweb7PpjbGZg06M3j60IhLi4CgQr1i4wQJIQ',
                     'username' => $request->username,
                     'password' => $request->password,
                     'provider' => 'admins'
@@ -29,5 +30,13 @@ class AdminAuthController extends Controller
             }
             return response()->json('Something gone wrong.',$e->getCode());
         }
+    }
+
+    public function logoutApi(Request $request)
+    {
+        $request->user()->token()->revoke();
+        return response()->json([
+            'message' => 'Successfully logged out'
+        ]);
     }
 }

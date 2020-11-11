@@ -19,6 +19,7 @@ class CustomAdminProvider
         $params = $request->all();
         
         if(array_key_exists('provider', $params)){
+            
             if($params['provider'] == 'admins'){
                 $model =  'App\Admin';
             }else{

@@ -17,6 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+// Route::middleware('auth:api')->get('/logout', function (Request $request) {
+//     return $request->user()->token()->revoke();
+// });
 
 Route::post('/login','UserAuthController@login');
+Route::middleware('auth:api')->get('/logout','UserAuthController@logoutApi');
+
+
 Route::post('/admin/login','AdminAuthController@login');
+Route::middleware('auth:api')->get('/admin/logout','AdminAuthController@logoutApi');
+
